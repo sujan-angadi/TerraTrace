@@ -1,0 +1,725 @@
+[
+  {
+    "source": "Landsat 8/9",
+    "aoi_name": "Jamnagar Test",
+    "variable": "land_surface_temperature",
+    "unit": "celsius",
+    "baseline_period": "2022-2023",
+    "recent_period": "2024-2025",
+    "status": "descriptive_comparison",
+    "comparable_months": 12,
+    "mean_monthly_change": -1.5562266647815717,
+    "comparisons": [
+      {
+        "calendar_month": 1,
+        "baseline_mean": 30.735972711018153,
+        "recent_mean": 32.447719415028885,
+        "absolute_change": 1.7117467040107321,
+        "percentage_change": 5.56919645948641,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 2,
+        "baseline_mean": 34.6683087348938,
+        "recent_mean": 36.628315278462,
+        "absolute_change": 1.9600065435681984,
+        "percentage_change": 5.653597233589429,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 3,
+        "baseline_mean": 43.99790334701538,
+        "recent_mean": 44.58602285385132,
+        "absolute_change": 0.5881195068359375,
+        "percentage_change": 1.3366989381229977,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 4,
+        "baseline_mean": 49.041449546813965,
+        "recent_mean": 49.46034266153971,
+        "absolute_change": 0.41889311472574775,
+        "percentage_change": 0.8541613647163527,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 5,
+        "baseline_mean": 50.981348752975464,
+        "recent_mean": 50.286515951156616,
+        "absolute_change": -0.6948328018188477,
+        "percentage_change": -1.362915691355252,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 6,
+        "baseline_mean": 46.86526441574097,
+        "recent_mean": 42.66204700469971,
+        "absolute_change": -4.203217411041258,
+        "percentage_change": -8.968726547138598,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 7,
+        "baseline_mean": 36.90357828140259,
+        "recent_mean": 29.194230318069458,
+        "absolute_change": -7.70934796333313,
+        "percentage_change": -20.890516102657248,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 8,
+        "baseline_mean": 39.29512596130371,
+        "recent_mean": 36.654035568237305,
+        "absolute_change": -2.6410903930664062,
+        "percentage_change": -6.721165356912834,
+        "baseline_year_count": 1,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 9,
+        "baseline_mean": 37.67977499961853,
+        "recent_mean": 35.462300300598145,
+        "absolute_change": -2.2174746990203857,
+        "percentage_change": -5.885052920413765,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 10,
+        "baseline_mean": 41.06363558769226,
+        "recent_mean": 38.05202372868855,
+        "absolute_change": -3.0116118590037075,
+        "percentage_change": -7.334011750061309,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 11,
+        "baseline_mean": 38.58035945892334,
+        "recent_mean": 37.13256824016571,
+        "absolute_change": -1.4477912187576294,
+        "percentage_change": -3.7526638918413875,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 12,
+        "baseline_mean": 33.95578694343567,
+        "recent_mean": 32.52766744295756,
+        "absolute_change": -1.428119500478111,
+        "percentage_change": -4.205820653949518,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      }
+    ],
+    "interpretation": "Descriptive seasonal comparison; not proof of industrial causation or statistical significance."
+  },
+  {
+    "source": "Landsat 8/9",
+    "aoi_name": "Jamnagar Test",
+    "variable": "ndvi",
+    "unit": "unitless",
+    "baseline_period": "2022-2023",
+    "recent_period": "2024-2025",
+    "status": "descriptive_comparison",
+    "comparable_months": 12,
+    "mean_monthly_change": 0.05475110023149422,
+    "comparisons": [
+      {
+        "calendar_month": 1,
+        "baseline_mean": 0.2416719999164343,
+        "recent_mean": 0.23847062451144058,
+        "absolute_change": -0.0032013754049937115,
+        "percentage_change": -1.3246778303240292,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 2,
+        "baseline_mean": 0.21058754126230875,
+        "recent_mean": 0.22755161726049014,
+        "absolute_change": 0.016964075998181394,
+        "percentage_change": 8.055593363451102,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 3,
+        "baseline_mean": 0.19217412918806076,
+        "recent_mean": 0.1942107742652297,
+        "absolute_change": 0.0020366450771689415,
+        "percentage_change": 1.0597914952308118,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 4,
+        "baseline_mean": 0.18474643677473068,
+        "recent_mean": 0.19429137508074443,
+        "absolute_change": 0.009544938306013745,
+        "percentage_change": 5.166507388530746,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 5,
+        "baseline_mean": 0.18753570265003613,
+        "recent_mean": 0.18999776244163513,
+        "absolute_change": 0.0024620597915989972,
+        "percentage_change": 1.312848570596444,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 6,
+        "baseline_mean": 0.20192880555987358,
+        "recent_mean": 0.18783876933157445,
+        "absolute_change": -0.01409003622829913,
+        "percentage_change": -6.977724742754107,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 7,
+        "baseline_mean": 0.2089208923280239,
+        "recent_mean": 0.422609806060791,
+        "absolute_change": 0.2136889137327671,
+        "percentage_change": 102.28221378513787,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 8,
+        "baseline_mean": 0.2407052144408226,
+        "recent_mean": 0.445728063583374,
+        "absolute_change": 0.20502284914255142,
+        "percentage_change": 85.17590681150628,
+        "baseline_year_count": 1,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 9,
+        "baseline_mean": 0.40027526393532753,
+        "recent_mean": 0.4384707733988762,
+        "absolute_change": 0.03819550946354866,
+        "percentage_change": 9.542310730877416,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 10,
+        "baseline_mean": 0.3476431667804718,
+        "recent_mean": 0.4195361708601316,
+        "absolute_change": 0.07189300407965982,
+        "percentage_change": 20.680114252053887,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 11,
+        "baseline_mean": 0.24164393730461597,
+        "recent_mean": 0.3269200983146826,
+        "absolute_change": 0.08527616101006663,
+        "percentage_change": 35.290006428991276,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 12,
+        "baseline_mean": 0.23503838386386633,
+        "recent_mean": 0.2642588416735331,
+        "absolute_change": 0.029220457809666756,
+        "percentage_change": 12.432206743980666,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      }
+    ],
+    "interpretation": "Descriptive seasonal comparison; not proof of industrial causation or statistical significance."
+  },
+  {
+    "source": "MODIS Terra",
+    "aoi_name": "Jamnagar Test",
+    "variable": "land_surface_temperature_day",
+    "unit": "celsius",
+    "baseline_period": "2022-2023",
+    "recent_period": "2024-2025",
+    "status": "descriptive_comparison",
+    "comparable_months": 11,
+    "mean_monthly_change": -2.19048278837493,
+    "comparisons": [
+      {
+        "calendar_month": 1,
+        "baseline_mean": 29.296006759007774,
+        "recent_mean": 28.484466075897217,
+        "absolute_change": -0.8115406831105574,
+        "percentage_change": -2.7701409608018652,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 2,
+        "baseline_mean": 35.57536768913269,
+        "recent_mean": 32.88403940200806,
+        "absolute_change": -2.691328287124634,
+        "percentage_change": -7.565145385543722,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 3,
+        "baseline_mean": 41.0110239982605,
+        "recent_mean": 39.485453605651855,
+        "absolute_change": -1.5255703926086426,
+        "percentage_change": -3.7199031964511553,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 4,
+        "baseline_mean": 44.89667367935181,
+        "recent_mean": 42.91968059539795,
+        "absolute_change": -1.9769930839538574,
+        "percentage_change": -4.403428855494669,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 5,
+        "baseline_mean": 42.258850479125975,
+        "recent_mean": 40.34997367858887,
+        "absolute_change": -1.908876800537108,
+        "percentage_change": -4.517105361112484,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 6,
+        "baseline_mean": 38.617892026901245,
+        "recent_mean": 35.84671211242676,
+        "absolute_change": -2.7711799144744873,
+        "percentage_change": -7.175896376073769,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 8,
+        "baseline_mean": 32.46043682098389,
+        "recent_mean": 32.00666809082031,
+        "absolute_change": -0.4537687301635742,
+        "percentage_change": -1.3979131971207415,
+        "baseline_year_count": 2,
+        "recent_year_count": 1
+      },
+      {
+        "calendar_month": 9,
+        "baseline_mean": 33.19999694824219,
+        "recent_mean": 31.099931716918945,
+        "absolute_change": -2.100065231323242,
+        "percentage_change": -6.325498266150993,
+        "baseline_year_count": 2,
+        "recent_year_count": 1
+      },
+      {
+        "calendar_month": 10,
+        "baseline_mean": 36.368951161702476,
+        "recent_mean": 34.22749137878418,
+        "absolute_change": -2.1414597829182966,
+        "percentage_change": -5.888153808442278,
+        "baseline_year_count": 1,
+        "recent_year_count": 1
+      },
+      {
+        "calendar_month": 11,
+        "baseline_mean": 35.30620980262756,
+        "recent_mean": 31.202072461446125,
+        "absolute_change": -4.104137341181438,
+        "percentage_change": -11.624406482952468,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 12,
+        "baseline_mean": 30.92169451713562,
+        "recent_mean": 27.311304092407227,
+        "absolute_change": -3.6103904247283936,
+        "percentage_change": -11.675913888637808,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      }
+    ],
+    "interpretation": "Descriptive seasonal comparison; not proof of industrial causation or statistical significance."
+  },
+  {
+    "source": "MODIS Terra",
+    "aoi_name": "Jamnagar Test",
+    "variable": "land_surface_temperature_night",
+    "unit": "celsius",
+    "baseline_period": "2022-2023",
+    "recent_period": "2024-2025",
+    "status": "descriptive_comparison",
+    "comparable_months": 12,
+    "mean_monthly_change": 0.4254941185315448,
+    "comparisons": [
+      {
+        "calendar_month": 1,
+        "baseline_mean": 17.167333245277405,
+        "recent_mean": 19.12928533554077,
+        "absolute_change": 1.9619520902633667,
+        "percentage_change": 11.42840336487954,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 2,
+        "baseline_mean": 20.950236399968468,
+        "recent_mean": 21.75778031349182,
+        "absolute_change": 0.8075439135233538,
+        "percentage_change": 3.8545813904255954,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 3,
+        "baseline_mean": 24.902082443237305,
+        "recent_mean": 24.996123552322388,
+        "absolute_change": 0.09404110908508301,
+        "percentage_change": 0.3776435537045693,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 4,
+        "baseline_mean": 27.471117099126182,
+        "recent_mean": 28.676863749821983,
+        "absolute_change": 1.2057466506958008,
+        "percentage_change": 4.389143136571443,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 5,
+        "baseline_mean": 28.372176599502563,
+        "recent_mean": 28.88502550125122,
+        "absolute_change": 0.5128489017486579,
+        "percentage_change": 1.8075768700722437,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 6,
+        "baseline_mean": 26.88602670033773,
+        "recent_mean": 27.59141286214193,
+        "absolute_change": 0.7053861618041992,
+        "percentage_change": 2.623616236293251,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 7,
+        "baseline_mean": 25.361665725708008,
+        "recent_mean": 23.147618293762207,
+        "absolute_change": -2.214047431945801,
+        "percentage_change": -8.729897538636502,
+        "baseline_year_count": 1,
+        "recent_year_count": 1
+      },
+      {
+        "calendar_month": 8,
+        "baseline_mean": 20.043039917945862,
+        "recent_mean": 20.254667282104492,
+        "absolute_change": 0.21162736415863037,
+        "percentage_change": 1.055864604496179,
+        "baseline_year_count": 2,
+        "recent_year_count": 1
+      },
+      {
+        "calendar_month": 9,
+        "baseline_mean": 23.591832876205444,
+        "recent_mean": 25.2017502784729,
+        "absolute_change": 1.609917402267456,
+        "percentage_change": 6.824045468256972,
+        "baseline_year_count": 2,
+        "recent_year_count": 1
+      },
+      {
+        "calendar_month": 10,
+        "baseline_mean": 26.589388529459637,
+        "recent_mean": 26.982389450073242,
+        "absolute_change": 0.3930009206136056,
+        "percentage_change": 1.4780366994080414,
+        "baseline_year_count": 1,
+        "recent_year_count": 1
+      },
+      {
+        "calendar_month": 11,
+        "baseline_mean": 24.011176109313965,
+        "recent_mean": 23.208953857421875,
+        "absolute_change": -0.8022222518920898,
+        "percentage_change": -3.341036891486989,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 12,
+        "baseline_mean": 19.51630449295044,
+        "recent_mean": 20.136439085006714,
+        "absolute_change": 0.6201345920562744,
+        "percentage_change": 3.1775205817283476,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      }
+    ],
+    "interpretation": "Descriptive seasonal comparison; not proof of industrial causation or statistical significance."
+  },
+  {
+    "source": "Sentinel-2",
+    "aoi_name": "Jamnagar Test",
+    "variable": "ndvi",
+    "unit": "unitless",
+    "baseline_period": "2022-2023",
+    "recent_period": "2024-2025",
+    "status": "descriptive_comparison",
+    "comparable_months": 12,
+    "mean_monthly_change": -0.003098861856026347,
+    "comparisons": [
+      {
+        "calendar_month": 1,
+        "baseline_mean": 0.17372104578784534,
+        "recent_mean": 0.12912535555660726,
+        "absolute_change": -0.04459569023123808,
+        "percentage_change": -25.67086217388998,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 2,
+        "baseline_mean": 0.12939041569119408,
+        "recent_mean": 0.12066402460138004,
+        "absolute_change": -0.008726391089814045,
+        "percentage_change": -6.744232981398433,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 3,
+        "baseline_mean": 0.10255229646960895,
+        "recent_mean": 0.10447251147457531,
+        "absolute_change": 0.0019202150049663635,
+        "percentage_change": 1.8724251636192402,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 4,
+        "baseline_mean": 0.09057332658105427,
+        "recent_mean": 0.10408626106523332,
+        "absolute_change": 0.013512934484179048,
+        "percentage_change": 14.9193311036073,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 5,
+        "baseline_mean": 0.09365502279251814,
+        "recent_mean": 0.08765139256470969,
+        "absolute_change": -0.006003630227808449,
+        "percentage_change": -6.410366522582346,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 6,
+        "baseline_mean": 0.09645598605275155,
+        "recent_mean": 0.09151693200692534,
+        "absolute_change": -0.004939054045826202,
+        "percentage_change": -5.120526208840005,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 7,
+        "baseline_mean": 0.3060391768813133,
+        "recent_mean": 0.18057185085490346,
+        "absolute_change": -0.12546732602640986,
+        "percentage_change": -40.99714530178207,
+        "baseline_year_count": 2,
+        "recent_year_count": 1
+      },
+      {
+        "calendar_month": 8,
+        "baseline_mean": 0.2242692718282342,
+        "recent_mean": 0.24520213901996613,
+        "absolute_change": 0.02093286719173193,
+        "percentage_change": 9.333809764078703,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 9,
+        "baseline_mean": 0.228222600184381,
+        "recent_mean": 0.22150303252662223,
+        "absolute_change": -0.006719567657758774,
+        "percentage_change": -2.944304224178515,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 10,
+        "baseline_mean": 0.16186100570484996,
+        "recent_mean": 0.2027080964297056,
+        "absolute_change": 0.04084709072485565,
+        "percentage_change": 25.23590567535422,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 11,
+        "baseline_mean": 0.12021442076989583,
+        "recent_mean": 0.18274342818629175,
+        "absolute_change": 0.06252900741639592,
+        "percentage_change": 52.01456448896725,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 12,
+        "baseline_mean": 0.13132410437933034,
+        "recent_mean": 0.15084730656374068,
+        "absolute_change": 0.019523202184410338,
+        "percentage_change": 14.866427055932906,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      }
+    ],
+    "interpretation": "Descriptive seasonal comparison; not proof of industrial causation or statistical significance."
+  },
+  {
+    "source": "Sentinel-2",
+    "aoi_name": "Jamnagar Test",
+    "variable": "ndwi_mcfeeters",
+    "unit": "unitless",
+    "baseline_period": "2022-2023",
+    "recent_period": "2024-2025",
+    "status": "descriptive_comparison",
+    "comparable_months": 12,
+    "mean_monthly_change": 0.002281742857488262,
+    "comparisons": [
+      {
+        "calendar_month": 1,
+        "baseline_mean": -0.22081239734377178,
+        "recent_mean": -0.17503899559378625,
+        "absolute_change": 0.04577340174998554,
+        "percentage_change": 20.729543404541374,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 2,
+        "baseline_mean": -0.18243224161957938,
+        "recent_mean": -0.17285276129841803,
+        "absolute_change": 0.009579480321161349,
+        "percentage_change": 5.250979890461007,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 3,
+        "baseline_mean": -0.15566011040161054,
+        "recent_mean": -0.15747882638658794,
+        "absolute_change": -0.0018187159849774037,
+        "percentage_change": -1.1683892426165121,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 4,
+        "baseline_mean": -0.13665757193747496,
+        "recent_mean": -0.15922569128729047,
+        "absolute_change": -0.022568119349815507,
+        "percentage_change": -16.514357038438465,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 5,
+        "baseline_mean": -0.1386418780311942,
+        "recent_mean": -0.13749876833919966,
+        "absolute_change": 0.0011431096919945483,
+        "percentage_change": 0.8245053429940918,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 6,
+        "baseline_mean": -0.12908634394407273,
+        "recent_mean": -0.14007232058793306,
+        "absolute_change": -0.010985976643860335,
+        "percentage_change": -8.510564563374775,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 7,
+        "baseline_mean": -0.2584046423435211,
+        "recent_mean": -0.16359541798010468,
+        "absolute_change": 0.09480922436341643,
+        "percentage_change": 36.69021713525479,
+        "baseline_year_count": 2,
+        "recent_year_count": 1
+      },
+      {
+        "calendar_month": 8,
+        "baseline_mean": -0.21215854585170746,
+        "recent_mean": -0.2398211732506752,
+        "absolute_change": -0.027662627398967743,
+        "percentage_change": -13.038658088419922,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 9,
+        "baseline_mean": -0.21980366048713523,
+        "recent_mean": -0.19612899313991267,
+        "absolute_change": 0.023674667347222567,
+        "percentage_change": 10.77082487832736,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 10,
+        "baseline_mean": -0.179555072914809,
+        "recent_mean": -0.20722455959767103,
+        "absolute_change": -0.027669486682862038,
+        "percentage_change": -15.410027816919433,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 11,
+        "baseline_mean": -0.1642369106411934,
+        "recent_mean": -0.20889510959386826,
+        "absolute_change": -0.044658198952674866,
+        "percentage_change": -27.191329146612574,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      },
+      {
+        "calendar_month": 12,
+        "baseline_mean": -0.17649054569857459,
+        "recent_mean": -0.18872638986933798,
+        "absolute_change": -0.0122358441707634,
+        "percentage_change": -6.932860976961794,
+        "baseline_year_count": 2,
+        "recent_year_count": 2
+      }
+    ],
+    "interpretation": "Descriptive seasonal comparison; not proof of industrial causation or statistical significance."
+  }
+]
