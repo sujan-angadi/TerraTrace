@@ -1172,8 +1172,15 @@ async function fetchBackendAggregations() {
   };
 
   // 1. Query stats endpoints
-  const statsCandidates =
-    cap.statsPaths.length > 0 ? cap.statsPaths : ['/stats', '/facilities/stats', '/api/stats'];
+  const statsCandidates = [
+    ...new Set([
+      ...cap.statsPaths,
+      '/global-stats',
+      '/stats',
+      '/facilities/stats',
+      '/api/stats',
+    ]),
+  ];
   for (const sPath of statsCandidates) {
     const res = await requestJson(sPath);
     if (res.ok && res.data && typeof res.data === 'object') {
@@ -1182,6 +1189,7 @@ async function fetchBackendAggregations() {
 
       const tFac = pickField(d, [
         'total_facilities',
+        'facility_count',
         'total_sites',
         'facilities_count',
         'total_plants',
