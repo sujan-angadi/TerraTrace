@@ -1,0 +1,197 @@
+.tt-analysis {
+  height: 100%;
+  overflow-y: auto;
+  padding: 28px;
+  background: #f5f8fa;
+  color: #182638;
+  font-family: inherit;
+}
+.tt-analysis-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+.tt-analysis-kicker {
+  color: #0b8279;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+.tt-analysis-header h1 { margin: 7px 0; font-size: 27px; }
+.tt-analysis-header p, .tt-analysis-detail-head p {
+  color: #64748b;
+  font-size: 13px;
+  margin: 5px 0;
+}
+.tt-analysis-status {
+  color: #087b50;
+  background: #e7f8ef;
+  border-radius: 20px;
+  padding: 9px 13px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+.tt-analysis-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 13px;
+  margin-bottom: 20px;
+}
+.tt-analysis-card {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 17px;
+  min-height: 125px;
+  border: 1px solid #dce5ed;
+  border-radius: 11px;
+  background: white;
+  color: #26364a;
+  cursor: pointer;
+}
+.tt-analysis-card.selected {
+  border: 2px solid #0b8279;
+  background: #effbf8;
+}
+.tt-analysis-icon { font-size: 23px; }
+.tt-analysis-card strong { font-size: 14px; }
+.tt-analysis-card small { color: #718096; font-size: 11px; line-height: 1.5; }
+.tt-analysis-detail {
+  background: white;
+  border: 1px solid #e0e7ef;
+  border-radius: 12px;
+  padding: 22px;
+}
+.tt-analysis-detail-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  align-items: center;
+  padding-bottom: 17px;
+  border-bottom: 1px solid #e8edf2;
+}
+.tt-analysis-detail-head h2 { margin: 6px 0; font-size: 21px; }
+.tt-analysis-unit {
+  background: #e9f7f5;
+  color: #087b73;
+  border-radius: 7px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.tt-analysis-facility, .tt-analysis-notice {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: #f3f8fb;
+  border-radius: 8px;
+  padding: 13px;
+  margin: 17px 0;
+  font-size: 12px;
+}
+.tt-analysis-facility small { color: #64748b; }
+.tt-analysis-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 18px 0;
+}
+.tt-analysis-metrics > div {
+  background: #f7f9fb;
+  border: 1px solid #e5ebf0;
+  padding: 14px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.tt-analysis-metrics small { color: #718096; font-size: 9px; font-weight: 800; }
+.tt-analysis-metrics strong { font-size: 14px; }
+.tt-analysis-chart {
+  padding: 17px;
+  border: 1px solid #e5ebf0;
+  border-radius: 9px;
+  margin-top: 17px;
+}
+.tt-analysis-chart h3 { font-size: 13px; margin: 0 0 18px; }
+.tt-analysis-bars {
+  height: 160px;
+  display: flex;
+  align-items: flex-end;
+  gap: 7px;
+  border-bottom: 1px solid #dbe4ec;
+  padding: 0 8px;
+}
+.tt-analysis-bar-wrap {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+.tt-analysis-bar {
+  width: 100%;
+  min-height: 3px;
+  background: #159b8c;
+  border-radius: 4px 4px 0 0;
+}
+.tt-analysis-message, .tt-analysis-footnote {
+  color: #718096;
+  font-size: 11px;
+}
+.tt-analysis-error { color: #b42318; font-size: 12px; }
+.tt-analysis-footnote { display: block; margin-top: 12px; }
+.tt-analysis-raw { margin-top: 18px; font-size: 12px; }
+.tt-analysis-raw summary { cursor: pointer; font-weight: 700; }
+.tt-analysis-raw pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 300px;
+  overflow: auto;
+  background: #101c2b;
+  color: #d4e6f2;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 10px;
+}
+.tt-analysis-footer { color: #8995a5; font-size: 10px; padding: 16px 0; }
+@media(max-width:700px) {
+  .tt-analysis { padding: 15px; }
+  .tt-analysis-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tt-analysis-metrics { grid-template-columns: 1fr; }
+  .tt-analysis-header { flex-direction: column; }
+}
+
+.tt-analysis-section-title {
+  margin: 22px 0 9px;
+  font-size: 14px;
+}
+.tt-analysis-source {
+  color: #64748b;
+  font-size: 11px;
+  margin-bottom: 14px;
+}
+.tt-analysis-observation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(210px,1fr));
+  gap: 12px;
+}
+.tt-analysis-observation {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  background: #f7fafc;
+  border: 1px solid #e1e9ef;
+  border-radius: 9px;
+  padding: 15px;
+}
+.tt-analysis-observation small {
+  color: #64748b;
+  font-size: 11px;
+}
+.tt-analysis-observation strong {
+  font-size: 21px;
+  color: #087f73;
+}

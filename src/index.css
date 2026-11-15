@@ -1,0 +1,61 @@
+:root {
+  --tt-bg-page: #f8fafc;
+  --tt-bg-warm: #fafaf9;
+  --tt-bg-surface: #ffffff;
+  --tt-bg-subtle: #f1f5f9;
+  --tt-bg-muted: #e2e8f0;
+
+  --tt-text-primary: #0f172a;
+  --tt-text-secondary: #334155;
+  --tt-text-muted: #64748b;
+
+  --tt-accent-teal: #0f766e;
+  --tt-accent-teal-hover: #115e59;
+  --tt-accent-teal-soft: #f0fdfa;
+  --tt-accent-teal-border: #99f6e4;
+
+  --tt-accent-blue: #1d4ed8;
+  --tt-accent-blue-soft: #eff6ff;
+  --tt-accent-blue-border: #bfdbfe;
+
+  --tt-border: #e2e8f0;
+  --tt-border-strong: #cbd5e1;
+
+  --tt-shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --tt-shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --tt-shadow-md: 0 4px 12px rgba(15, 23, 42, 0.06), 0 2px 4px rgba(15, 23, 42, 0.04);
+
+  --tt-radius-sm: 6px;
+  --tt-radius-md: 8px;
+  --tt-radius-lg: 10px;
+
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  color: var(--tt-text-primary);
+  background-color: var(--tt-bg-page);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--tt-bg-page);
+  color: var(--tt-text-primary);
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
