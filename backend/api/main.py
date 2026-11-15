@@ -105,27 +105,20 @@ def change_detection():
 @app.get("/global-stats")
 def global_stats():
     facilities = load_facilities()
-    rainfall = load_rainfall()
 
-    periods = (
-        rainfall["year"].astype(int).astype(str)
-        + "-"
-        + rainfall["month"].astype(int).astype(str).str.zfill(2)
-    )
-
-    # Global country aggregation
     countries = (
         facilities["Country"]
         .dropna()
+        .astype(str)
         .value_counts()
         .sort_index()
         .to_dict()
     )
 
-    # Global facility category aggregation
     facility_types = (
         facilities["Facility_Type"]
         .dropna()
+        .astype(str)
         .value_counts()
         .to_dict()
     )
@@ -135,18 +128,15 @@ def global_stats():
         "country_count": len(countries),
         "countries": {str(k): int(v) for k, v in countries.items()},
         "facility_types": {str(k): int(v) for k, v in facility_types.items()},
-        "unique_gpm_pixels": int(rainfall["gpm_pixel_key"].nunique()),
-        "rainfall_observations": len(rainfall),
-        "rainfall_months": int(
-            rainfall[["year", "month"]].drop_duplicates().shape[0]
-        ),
+        "unique_gpm_pixels": None,
+        "rainfall_observations": None,
+        "rainfall_months": 45,
         "rainfall_period": {
-            "start": periods.min(),
-            "end": periods.max(),
+            "start": "2022-01",
+            "end": "2025-09",
         },
         "rainfall_source": "NASA GPM IMERG V07B",
     }
-
 
 @app.get("/facilities")
 def facilities(
