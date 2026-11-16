@@ -403,10 +403,9 @@ async function requestJson(pathAndQuery, { ttlMs = DEFAULT_CACHE_TTL_MS, timeout
   }
 
   const promise = (async () => {
-    const basesToTry = [
-      API_BASE,
-      ...CANDIDATE_BASES.filter((b) => b !== API_BASE),
-    ];
+    const basesToTry = import.meta.env.PROD
+      ? [API_BASE]
+      : [API_BASE, ...CANDIDATE_BASES.filter((b) => b !== API_BASE)];
 
     let lastError = null;
 
