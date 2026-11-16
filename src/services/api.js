@@ -1281,19 +1281,85 @@ async function fetchBackendAggregations() {
  * so markers, all available countries, and all categories populate immediately.
  */
 export async function fetchInitialDashboardData() {
-  const cap = await discoverApiCapabilities();
-  const maxBatchLimit = Math.min(cap.facilityQueryParams.maxLimit || 500, 1000);
+  try {
+    const response = await fetch('/data/facilities.json', {
+      headers: { Accept: 'application/json' },
+    });
 
-  const [agg, firstPage] = await Promise.all([
-    fetchBackendAggregations(),
-    fetchFacilities({ limit: maxBatchLimit, offset: 0 }),
-  ]);
+    if (!response.ok) {
+      throw new Error(`Static facility dataset returned HTTP ${response.status}`);
+    }
 
-  if (!firstPage.ok && !agg.statsEndpointUsed) {
+    const data = await response.json();
+    if (!Array.isArray(data.facilities)) {
+      throw new Error('Invalid static facility dataset');
+    }
+
+    const facilities = data.facilities
+      .map((record, index) => normalizeFacilityRecord(record, index))
+      .filter(Boolean);
+
+    const countryCounts = new Map();
+    const categoryCounts = new Map();
+    const rawCategoryTokens = new Map();
+
+    facilities.forEach((f) => {
+      if (f.country && f.country !== 'Unspecified') {
+        countryCounts.set(
+          f.country,
+          (countryCounts.get(f.country) || 0) + 1
+        );
+      }
+
+      if (f.category) {
+        categoryCounts.set(
+          f.category,
+          (categoryCounts.get(f.category) || 0) + 1
+        );
+
+        if (f.raw_type && !rawCategoryTokens.has(f.category)) {
+          rawCategoryTokens.set(f.category, f.raw_type);
+        }
+      }
+    });
+
+    const countries = Array.from(countryCounts.entries())
+      .map(([name, count]) => ({
+        name,
+        count: data.countries?.[name] ?? count,
+        loadedCount: count,
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+
+    const categories = Array.from(categoryCounts.entries())
+      .map(([name, count]) => ({
+        name,
+        count,
+        loadedCount: count,
+        rawToken: rawCategoryTokens.get(name) || name.toLowerCase(),
+      }))
+      .sort((a, b) => b.count - a.count);
+
+    return {
+      ok: true,
+      apiState: 'online',
+      apiBase: API_BASE,
+      facilities,
+      countries,
+      categories,
+      totalFacilities: data.total ?? facilities.length,
+      totalCountries: countries.length,
+      loadedCount: facilities.length,
+      endpointsUsed: ['/data/facilities.json'],
+      capabilities: null,
+    };
+  } catch (error) {
+    console.error('Failed to load static facility dataset:', error);
+
     return {
       ok: false,
-      apiState: firstPage.apiState || 'offline',
-      error: firstPage.error || 'Failed to load facilities from backend',
+      apiState: 'offline',
+      error: error.message || 'Failed to load static facility dataset',
       facilities: [],
       countries: [],
       categories: [],
@@ -1302,131 +1368,6 @@ export async function fetchInitialDashboardData() {
       endpointsUsed: [],
     };
   }
-
-  const facilityMap = new Map();
-  firstPage.facilities.forEach((f) => facilityMap.set(f.id, f));
-
-  const endpointsUsed = new Set();
-  if (firstPage.endpoint) endpointsUsed.add(firstPage.endpoint);
-  if (agg.statsEndpointUsed) endpointsUsed.add(agg.statsEndpointUsed);
-
-  const totalEst =
-    agg.totalFacilities || firstPage.reportedTotal || 145596;
-
-  // Fetch distributed batches across the dataset so the map has global marker coverage
-  // and countries/categories are populated even if the backend CSV is sorted alphabetically.
-  if (cap.facilityQueryParams.offsetParam && firstPage.ok) {
-    const batchSize = Math.min(400, firstPage.appliedLimit || maxBatchLimit);
-    const numStrata = agg.countriesMap.size >= 150 ? 6 : 12;
-    const step = Math.max(batchSize, Math.floor(totalEst / (numStrata + 1)));
-    const offsets = [];
-    for (let i = 1; i <= numStrata; i++) {
-      const off = i * step;
-      if (off < totalEst) offsets.push(off);
-    }
-
-    const batchResults = await Promise.all(
-      offsets.map((off) => fetchFacilities({ limit: batchSize, offset: off }))
-    );
-
-    batchResults.forEach((r) => {
-      if (r.ok && r.facilities.length > 0) {
-        endpointsUsed.add(r.endpoint);
-        r.facilities.forEach((f) => {
-          if (!facilityMap.has(f.id)) {
-            facilityMap.set(f.id, f);
-          }
-        });
-      }
-    });
-  }
-
-  const allLoadedFacilities = Array.from(facilityMap.values());
-
-  // Tally countries and categories from loaded records + backend aggregations
-  const loadedCountryCounts = new Map();
-  const loadedCategoryCounts = new Map();
-  const rawCategoryTokens = new Map();
-
-  allLoadedFacilities.forEach((f) => {
-    if (f.country && f.country !== 'Unspecified') {
-      loadedCountryCounts.set(f.country, (loadedCountryCounts.get(f.country) || 0) + 1);
-    }
-    if (f.category) {
-      loadedCategoryCounts.set(f.category, (loadedCategoryCounts.get(f.category) || 0) + 1);
-      if (f.raw_type && !rawCategoryTokens.has(f.category)) {
-        rawCategoryTokens.set(f.category, f.raw_type);
-      }
-    }
-  });
-
-  // Merge countries
-  const finalCountriesMap = new Map();
-  for (const [cName, aggCount] of agg.countriesMap.entries()) {
-    finalCountriesMap.set(cName, aggCount ?? loadedCountryCounts.get(cName) ?? null);
-  }
-  for (const [cName, loadedCount] of loadedCountryCounts.entries()) {
-    if (!finalCountriesMap.has(cName)) {
-      finalCountriesMap.set(cName, loadedCount);
-    }
-  }
-
-  const countries = Array.from(finalCountriesMap.entries())
-    .map(([name, count]) => ({
-      name,
-      count,
-      loadedCount: loadedCountryCounts.get(name) || 0,
-    }))
-    .sort((a, b) => a.name.localeCompare(b.name));
-
-  // Merge categories
-  const finalCategoriesMap = new Map();
-  for (const [catName, info] of agg.categoriesMap.entries()) {
-    finalCategoriesMap.set(catName, {
-      name: catName,
-      count: info.count ?? loadedCategoryCounts.get(catName) ?? 0,
-      loadedCount: loadedCategoryCounts.get(catName) || 0,
-      rawToken: info.rawToken || rawCategoryTokens.get(catName) || catName.toLowerCase(),
-    });
-  }
-  for (const [catName, loadedCount] of loadedCategoryCounts.entries()) {
-    if (!finalCategoriesMap.has(catName)) {
-      finalCategoriesMap.set(catName, {
-        name: catName,
-        count: loadedCount,
-        loadedCount,
-        rawToken: rawCategoryTokens.get(catName) || catName.toLowerCase(),
-      });
-    }
-  }
-
-  const categories = Array.from(finalCategoriesMap.values()).sort(
-    (a, b) => (b.count || 0) - (a.count || 0)
-  );
-
-  const categorySum = categories.reduce((acc, c) => acc + (c.count || 0), 0);
-  const totalFacilities =
-    agg.totalFacilities ||
-    firstPage.reportedTotal ||
-    (categorySum > allLoadedFacilities.length ? categorySum : allLoadedFacilities.length);
-
-  const totalCountries =
-    agg.totalCountries ||
-    (countries.length > 0 ? countries.length : loadedCountryCounts.size);
-
-  return {
-    ok: true,
-    apiState: 'online',
-    apiBase: API_BASE,
-    facilities: allLoadedFacilities,
-    countries,
-    categories,
-    totalFacilities,
-    totalCountries,
-    loadedCount: allLoadedFacilities.length,
-    endpointsUsed: Array.from(endpointsUsed),
-    capabilities: cap,
-  };
 }
 
 /**
