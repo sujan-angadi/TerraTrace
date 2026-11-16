@@ -1844,6 +1844,79 @@ export default function App({ onNavigateHome }) {
       ) : (
         <AnalysisPanel selectedFacility={selectedFacility} envTelemetry={envTelemetry} bufferKm={bufferKm} />
       )}
+
+      {/* FULL-SCREEN BACKEND INITIALIZATION EXPERIENCE */}
+      {apiState === 'loading' && (
+        <div className="tt-startup-overlay" role="status" aria-live="polite">
+          <div className="tt-startup-grid" aria-hidden="true" />
+
+          <section className="tt-startup-panel">
+            <div className="tt-startup-brand">
+              <svg viewBox="0 0 28 28" fill="none" aria-hidden="true">
+                <circle cx="14" cy="14" r="10" stroke="#5eead4" strokeWidth="1.75" />
+                <path
+                  d="M4.5 14h19M14 4.5c2.7 2.6 4.2 5.9 4.2 9.5s-1.5 6.9-4.2 9.5c-2.7-2.6-4.2-5.9-4.2-9.5S11.3 7.1 14 4.5z"
+                  stroke="#5eead4"
+                  strokeWidth="1.4"
+                />
+                <circle cx="19.5" cy="9.5" r="2.5" fill="#2dd4bf" />
+              </svg>
+              <span>TERRATRACE</span>
+              <span className="tt-startup-tag">GLOBAL GIS</span>
+            </div>
+
+            <div className="tt-startup-heading">
+              <span className="tt-startup-eyebrow">GLOBAL ENVIRONMENTAL DATA</span>
+              <h2>Getting TerraTrace ready</h2>
+              <p>
+                We're connecting to our servers and loading global facility data. This may take a few moments.
+              </p>
+              <p className="tt-startup-reload">
+                If the website doesn't load, please reload the page.
+              </p>
+            </div>
+
+            <div className="tt-startup-progress">
+              <div className="tt-startup-progress-track">
+                <span />
+              </div>
+              <div className="tt-startup-progress-caption">
+                <span>LOADING YOUR DASHBOARD...</span>
+                <span className="tt-startup-pulse">LIVE</span>
+              </div>
+            </div>
+
+            <div className="tt-startup-steps">
+              <div className="tt-startup-step active">
+                <span className="tt-startup-step-icon"><i /></span>
+                <div>
+                  <strong>Connecting to TerraTrace</strong>
+                  <small>Establishing a connection to our servers</small>
+                </div>
+              </div>
+              <div className="tt-startup-step active">
+                <span className="tt-startup-step-icon"><i /></span>
+                <div>
+                  <strong>Loading facility data</strong>
+                  <small>Getting global facility information</small>
+                </div>
+              </div>
+              <div className="tt-startup-step">
+                <span className="tt-startup-step-icon"><i /></span>
+                <div>
+                  <strong>Preparing your dashboard</strong>
+                  <small>Getting the map ready</small>
+                </div>
+              </div>
+            </div>
+
+            <div className="tt-startup-footer">
+              <span>GLOBAL FACILITY DATA</span>
+              <span>TERRATRACE</span>
+            </div>
+          </section>
+        </div>
+      )}
     </div>
   );
 }

@@ -1162,3 +1162,365 @@
   font-weight: 800;
   letter-spacing: .06em;
 }
+
+/* ==========================================================
+   TERRATRACE FULL-SCREEN STARTUP EXPERIENCE
+   ========================================================== */
+
+.tt-startup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow: auto;
+  background:
+    radial-gradient(ellipse at 50% 38%, rgba(13, 105, 112, .22), transparent 48%),
+    linear-gradient(145deg, #06121e 0%, #0a1c2b 52%, #071522 100%);
+  color: #e2e8f0;
+  font-family: 'Inter', sans-serif;
+  animation: tt-startup-appear .35s ease-out both;
+}
+
+.tt-startup-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .13;
+  background-image:
+    linear-gradient(rgba(94, 234, 212, .14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(94, 234, 212, .14) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at center, black, transparent 78%);
+}
+
+.tt-startup-panel {
+  position: relative;
+  width: min(100%, 570px);
+  padding: 30px 34px 24px;
+  border: 1px solid rgba(94, 234, 212, .2);
+  border-radius: 18px;
+  background: rgba(8, 26, 40, .92);
+  box-shadow: 0 28px 100px rgba(0, 0, 0, .42);
+  backdrop-filter: blur(18px);
+}
+
+.tt-startup-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #f0fdfa;
+  font-size: .86rem;
+  font-weight: 800;
+  letter-spacing: .13em;
+}
+
+.tt-startup-brand svg {
+  width: 30px;
+  height: 30px;
+}
+
+.tt-startup-tag {
+  margin-left: auto;
+  padding: 5px 8px;
+  border: 1px solid rgba(94, 234, 212, .25);
+  border-radius: 5px;
+  color: #5eead4;
+  font-size: .6rem;
+  letter-spacing: .1em;
+}
+
+.tt-startup-orbit {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 28px auto 22px;
+  display: grid;
+  place-items: center;
+}
+
+.tt-startup-orbit-ring {
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(94, 234, 212, .3);
+  border-radius: 50%;
+}
+
+.tt-orbit-one {
+  animation: tt-orbit-spin 8s linear infinite;
+  border-top-color: #5eead4;
+  border-right-color: transparent;
+}
+
+.tt-orbit-two {
+  inset: 22px;
+  border-style: dashed;
+  border-color: rgba(45, 212, 191, .35);
+  animation: tt-orbit-spin 14s linear infinite reverse;
+}
+
+.tt-startup-orbit-core {
+  width: 76px;
+  height: 76px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(94, 234, 212, .35);
+  border-radius: 50%;
+  background: rgba(13, 148, 136, .12);
+  box-shadow: 0 0 35px rgba(45, 212, 191, .14);
+}
+
+.tt-startup-orbit-core svg {
+  width: 58px;
+  height: 58px;
+  animation: tt-orbit-spin 18s linear infinite;
+}
+
+.tt-orbit-point {
+  position: absolute;
+  top: 18px;
+  right: 28px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #5eead4;
+  box-shadow: 0 0 15px #5eead4;
+}
+
+.tt-startup-heading {
+  text-align: center;
+}
+
+.tt-startup-eyebrow {
+  color: #5eead4;
+  font-size: .64rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+}
+
+.tt-startup-heading h2 {
+  margin: 10px 0;
+  color: #f0fdfa;
+  font-size: clamp(1.45rem, 4vw, 2rem);
+  line-height: 1.2;
+  letter-spacing: -.045em;
+}
+
+.tt-startup-heading p {
+  max-width: 420px;
+  margin: 0 auto;
+  color: #94a3b8;
+  font-size: .83rem;
+  line-height: 1.65;
+}
+
+.tt-startup-progress {
+  margin-top: 28px;
+}
+
+.tt-startup-progress-track {
+  height: 4px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #1e3545;
+}
+
+.tt-startup-progress-track span {
+  display: block;
+  width: 35%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #0d9488, #5eead4);
+  animation: tt-progress-sweep 1.8s ease-in-out infinite;
+}
+
+.tt-startup-progress-caption,
+.tt-startup-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #7891a3;
+  font-size: .59rem;
+  font-weight: 700;
+  letter-spacing: .09em;
+}
+
+.tt-startup-progress-caption {
+  margin-top: 9px;
+}
+
+.tt-startup-pulse {
+  color: #5eead4;
+  animation: tt-startup-blink 1.3s ease-in-out infinite;
+}
+
+.tt-startup-steps {
+  display: grid;
+  gap: 17px;
+  margin-top: 27px;
+  padding: 20px 0;
+  border-top: 1px solid rgba(148, 163, 184, .13);
+  border-bottom: 1px solid rgba(148, 163, 184, .13);
+}
+
+.tt-startup-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: .48;
+}
+
+.tt-startup-step.active {
+  opacity: 1;
+}
+
+.tt-startup-step-icon {
+  width: 25px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border: 1px solid #385466;
+  border-radius: 50%;
+}
+
+.tt-startup-step.active .tt-startup-step-icon {
+  border-color: #2dd4bf;
+}
+
+.tt-startup-step-icon i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #5eead4;
+}
+
+.tt-startup-step.active .tt-startup-step-icon i {
+  animation: tt-startup-blink 1.3s ease-in-out infinite;
+}
+
+.tt-startup-step strong,
+.tt-startup-step small {
+  display: block;
+}
+
+.tt-startup-step strong {
+  color: #dbeafe;
+  font-size: .78rem;
+  font-weight: 650;
+}
+
+.tt-startup-step small {
+  margin-top: 3px;
+  color: #8298a9;
+  font-size: .68rem;
+}
+
+.tt-startup-footer {
+  margin-top: 18px;
+  font-size: .54rem;
+}
+
+@keyframes tt-startup-appear {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes tt-orbit-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes tt-progress-sweep {
+  0% { transform: translateX(-110%); }
+  100% { transform: translateX(310%); }
+}
+
+@keyframes tt-startup-blink {
+  50% { opacity: .35; }
+}
+
+@media (max-width: 600px) {
+  .tt-startup-overlay {
+    padding: 14px;
+  }
+
+  .tt-startup-panel {
+    padding: 23px 19px 19px;
+  }
+
+  .tt-startup-orbit {
+    width: 120px;
+    height: 120px;
+    margin: 23px auto 17px;
+  }
+
+  .tt-startup-footer {
+    font-size: .48rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tt-startup-overlay *,
+  .tt-startup-overlay *::before,
+  .tt-startup-overlay *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* TerraTrace — simplified public startup screen */
+
+.tt-startup-grid {
+  display: none;
+}
+
+.tt-startup-panel {
+  max-width: 490px;
+  padding: 34px;
+  border-color: rgba(94, 234, 212, .16);
+  border-radius: 12px;
+  box-shadow: 0 16px 55px rgba(0, 0, 0, .25);
+}
+
+.tt-startup-orbit {
+  display: none;
+}
+
+.tt-startup-heading h2 {
+  font-size: 1.75rem;
+  letter-spacing: -.025em;
+}
+
+.tt-startup-heading p {
+  font-size: .9rem;
+  line-height: 1.65;
+}
+
+.tt-startup-reload {
+  margin: 16px auto 0 !important;
+  color: #a8bdca !important;
+  font-size: .78rem !important;
+  text-align: center;
+}
+
+.tt-startup-steps {
+  gap: 13px;
+}
+
+.tt-startup-step {
+  opacity: .8;
+}
+
+.tt-startup-footer,
+.tt-startup-tag,
+.tt-startup-eyebrow {
+  letter-spacing: .07em;
+}
+
+@media (max-width: 600px) {
+  .tt-startup-panel {
+    padding: 24px 19px;
+  }
+}
