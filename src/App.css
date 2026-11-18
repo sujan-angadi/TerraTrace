@@ -1524,3 +1524,79 @@
     padding: 24px 19px;
   }
 }
+
+
+/* TerraTrace requested frontend refinements */
+.tt-dashboard-hidden { display: none !important; }
+.tt-analysis-hidden { display: none !important; }
+.tt-analysis-visible { display: block; width: 100%; min-height: 100%; overflow: auto; }
+
+.tt-coverage-notice {
+  margin: 10px 0;
+  padding: 13px;
+  border: 1px solid #d7e5ec;
+  border-radius: 8px;
+  background: #f8fbfd;
+  color: #40536b;
+  font-size: 12px;
+  line-height: 1.55;
+}
+.tt-coverage-notice strong {
+  display: block;
+  margin-bottom: 7px;
+  color: #087f73;
+  font-size: 13px;
+}
+.tt-coverage-notice p { margin: 7px 0; }
+
+/* Plain light loading screen, replacing the decorative dark startup experience. */
+.tt-startup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: #f7f9fb;
+}
+.tt-startup-overlay .tt-startup-grid { display: none; }
+.tt-startup-panel {
+  width: min(360px, 100%);
+  padding: 26px;
+  border: 1px solid #e1e8ef;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 8px 28px rgba(20, 40, 60, .06);
+  color: #26364a;
+  text-align: center;
+}
+.tt-startup-brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  color: #203247;
+  font-size: 16px;
+}
+.tt-startup-mark { color: #0b8279; font-size: 24px; }
+.tt-startup-panel > p { margin: 18px 0 12px; color: #64748b; font-size: 13px; }
+.tt-simple-loader {
+  width: 100%;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #e8eef2;
+}
+.tt-simple-loader::after {
+  content: "";
+  display: block;
+  width: 35%;
+  height: 100%;
+  border-radius: inherit;
+  background: #0b8279;
+  animation: tt-simple-loading 1.2s ease-in-out infinite;
+}
+@keyframes tt-simple-loading {
+  from { transform: translateX(-110%); }
+  to { transform: translateX(310%); }
+}

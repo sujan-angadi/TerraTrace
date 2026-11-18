@@ -14,6 +14,40 @@ import './App.css';
 
 const BUFFER_OPTIONS_KM = [1, 5, 10, 25];
 
+
+// A facility is listed only when all four source datasets contain real values.
+// Missing fields, empty strings, and placeholder status text are never treated as data.
+const hasFiniteSourceValue = (raw, keys) => keys.some((key) => {
+  const value = raw?.[key];
+  return value !== null && value !== undefined && value !== '' &&
+    Number.isFinite(Number(value));
+});
+
+function hasCompleteEnvironmentalData(facility) {
+  const raw = facility?.raw || {};
+  const rainfall = hasFiniteSourceValue(raw, [
+    'gpm_gpm_mean_monthly_accumulation_mm',
+    'mean_monthly_rainfall_mm',
+    'rainfall_mean_mm',
+  ]);
+  const hydrology = hasFiniteSourceValue(raw, [
+    'surface_soil_moisture_m3_m3',
+    'rootzone_soil_moisture_m3_m3',
+    'profile_soil_moisture_m3_m3',
+    'soil_moisture_m3_m3',
+  ]);
+  const industrialImpact = hasFiniteSourceValue(raw, [
+    'did_estimate', 'did_effect', 'difference_in_differences',
+    'att_estimate', 'treatment_effect',
+  ]);
+  const temperature = hasFiniteSourceValue(raw, [
+    'modis_combined_mean_lst_c',
+    'modis_day_mean_lst_c',
+    'modis_night_mean_lst_c',
+  ]);
+  return rainfall && hydrology && industrialImpact && temperature;
+}
+
 const CATEGORY_COLORS = {
   Solar: '#d97706',
   Wind: '#0284c7',
@@ -143,6 +177,19 @@ export default function App({ onNavigateHome }) {
   const markersLayerRef = useRef(null);
   const boundaryLayerRef = useRef(null);
   const canvasRendererRef = useRef(null);
+
+  // Leaflet needs a size recalculation after the map is hidden by the
+  // Environmental Analysis view and then mounted/shown again.
+  useEffect(() => {
+    if (showAnalysis) return undefined;
+    const frame = requestAnimationFrame(() => {
+      if (mapRef.current) {
+        mapRef.current.invalidateSize({ pan: false });
+      }
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [showAnalysis]);
+
   const countryDropdownRef = useRef(null);
   const searchDropdownRef = useRef(null);
 
@@ -1173,8 +1220,7 @@ export default function App({ onNavigateHome }) {
       )}
 
       {/* MAIN WORKSPACE */}
-      {!showAnalysis ? (
-      <div className="body-layout">
+      <div className={`body-layout ${showAnalysis ? 'tt-dashboard-hidden' : ''}`} aria-hidden={showAnalysis}>
         {/* LEFT SIDEBAR: AUTOCOMPLETE SEARCH, SEARCHABLE COUNTRY DROPDOWN & CATEGORIES */}
         <aside className="sidebar">
           <div className="sidebar-section">
@@ -1473,68 +1519,64 @@ export default function App({ onNavigateHome }) {
             </div>
           </div>
 
-          {/* MATCHING FACILITY DIRECTORY LIST */}
-          <div className="sidebar-section db-sidebar__list-section">
-            <div className="sidebar-header">
-              <h2>Facilities in Viewport</h2>
-              <span className="db-sidebar__sub">
-                {viewportFacilities.length.toLocaleString()} shown
-              </span>
-            </div>
-
-            {apiState === 'loading' ? (
-              <div className="empty-state">
-                <strong>Loading facility dataset from FastAPI…</strong>
-                <span>Retrieving coordinates and country aggregations.</span>
-              </div>
-            ) : viewportFacilities.length === 0 ? (
-              <div className="empty-state">
-                <strong>No loaded facilities in current view</strong>
-                <span>
-                  {filterLoading
-                    ? 'Querying backend for matching records…'
-                    : 'Zoom out, pan the map, or reset active filters.'}
-                </span>
-                <button type="button" className="action-btn" onClick={handleResetFilters}>
-                  Reset Filters
-                </button>
-              </div>
-            ) : (
-              <div className="facility-list">
-                {viewportFacilities.slice(0, 100).map((fac) => (
-                  <button
-                    key={fac.id}
-                    type="button"
-                    className={`facility-item ${
-                      selectedFacility?.id === fac.id ? 'selected' : ''
-                    }`}
-                    onClick={() => handleSelectFacility(fac, false)}
-                  >
-                    <div className="db-facility-row__top">
-                      <span className="db-facility-row__name">{fac.name}</span>
-                      <span
-                        className="db-facility-row__badge"
-                        style={{
-                          backgroundColor: `${getCategoryColor(fac.category)}18`,
-                          color: getCategoryColor(fac.category),
-                        }}
+          {/* LOCATIONS WITH COMPLETE ENVIRONMENTAL DATA */}
+          {(() => {
+            const completeFacilities = viewportFacilities.filter(hasCompleteEnvironmentalData);
+            return (
+              <div className="sidebar-section db-sidebar__list-section">
+                <div className="sidebar-header">
+                  <h2>Locations with Complete Environmental Data</h2>
+                  <span className="db-sidebar__sub">{completeFacilities.length.toLocaleString()} shown</span>
+                </div>
+                {apiState === 'loading' || filterLoading ? (
+                  <div className="empty-state">
+                    <strong>Checking environmental data coverage…</strong>
+                  </div>
+                ) : completeFacilities.length > 0 ? (
+                  <div className="facility-list">
+                    {completeFacilities.slice(0, 100).map((fac) => (
+                      <button
+                        key={fac.id}
+                        type="button"
+                        className={`facility-item ${selectedFacility?.id === fac.id ? 'selected' : ''}`}
+                        onClick={() => handleSelectFacility(fac, false)}
                       >
-                        {fac.category}
-                      </span>
-                    </div>
-                    <div className="db-facility-row__meta">
-                      <span>{fac.country}</span>
-                      <span>
-                        {fac.capacity_mw !== null
-                          ? `${fac.capacity_mw.toLocaleString()} MW`
-                          : 'Unlisted MW'}
-                      </span>
-                    </div>
-                  </button>
-                ))}
+                        <div className="db-facility-row__top">
+                          <span className="db-facility-row__name">{fac.name}</span>
+                          <span
+                            className="db-facility-row__badge"
+                            style={{ backgroundColor: `${getCategoryColor(fac.category)}18`, color: getCategoryColor(fac.category) }}
+                          >
+                            {fac.category}
+                          </span>
+                        </div>
+                        <div className="db-facility-row__meta">
+                          <span>{fac.country}</span>
+                          <span>4/4 datasets available</span>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="tt-coverage-notice">
+                    <strong>Environmental data coverage is still expanding</strong>
+                    <p>
+                      We are sorry that complete environmental data is not yet available for every facility.
+                      During this hackathon, time constraints and the substantial processing required to
+                      extract, validate and integrate datasets across more than 145,000 locations limited
+                      the coverage we could include in this release.
+                    </p>
+                    <p>
+                      This list includes only locations where rainfall, hydrology and soil, industrial
+                      impact (DiD), and MODIS land-surface temperature data are all present in the loaded
+                      source records. We are working to expand coverage in the next phase.
+                    </p>
+                    <p>Thank you for your understanding and cooperation.</p>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
+            );
+          })()}
         </aside>
 
         {/* CENTER INTERACTIVE LEAFLET MAP STAGE */}
@@ -1817,10 +1859,16 @@ export default function App({ onNavigateHome }) {
 
                   {envTelemetry.state === 'unavailable' && (
                     <div className="env-box">
-                      <strong>No Environmental Measurements Available for Selection</strong>
-                      <p>{envTelemetry.message}</p>
+                      <strong>Environmental data is not yet available for this location</strong>
+                      <p>
+                        We are sorry that this location does not yet have complete environmental data.
+                        Due to hackathon time constraints and the processing required to extract and
+                        validate datasets for more than 145,000 facilities, some locations could not
+                        be included in this release. We are working to expand coverage in the next
+                        phase. Thank you for your understanding and cooperation.
+                      </p>
                       <small>
-                        TerraTrace displays only genuine measurements returned by the backend and never fabricates satellite telemetry.
+                        Only verified source measurements are displayed. Missing values are never treated as zero.
                       </small>
                     </div>
                   )}
@@ -1841,80 +1889,21 @@ export default function App({ onNavigateHome }) {
           )}
         </aside>
       </div>
-      ) : (
+      <div className={showAnalysis ? 'tt-analysis-visible' : 'tt-analysis-hidden'}>
         <AnalysisPanel selectedFacility={selectedFacility} envTelemetry={envTelemetry} bufferKm={bufferKm} />
-      )}
+      </div>
 
-      {/* FULL-SCREEN BACKEND INITIALIZATION EXPERIENCE */}
+      {/* SIMPLE LIGHT BACKEND INITIALIZATION EXPERIENCE */}
       {apiState === 'loading' && (
         <div className="tt-startup-overlay" role="status" aria-live="polite">
-          <div className="tt-startup-grid" aria-hidden="true" />
-
-          <section className="tt-startup-panel">
+          <div className="tt-startup-panel">
             <div className="tt-startup-brand">
-              <svg viewBox="0 0 28 28" fill="none" aria-hidden="true">
-                <circle cx="14" cy="14" r="10" stroke="#5eead4" strokeWidth="1.75" />
-                <path
-                  d="M4.5 14h19M14 4.5c2.7 2.6 4.2 5.9 4.2 9.5s-1.5 6.9-4.2 9.5c-2.7-2.6-4.2-5.9-4.2-9.5S11.3 7.1 14 4.5z"
-                  stroke="#5eead4"
-                  strokeWidth="1.4"
-                />
-                <circle cx="19.5" cy="9.5" r="2.5" fill="#2dd4bf" />
-              </svg>
-              <span>TERRATRACE</span>
-              <span className="tt-startup-tag">GLOBAL GIS</span>
+              <span className="tt-startup-mark" aria-hidden="true">◎</span>
+              <strong>TerraTrace</strong>
             </div>
-
-            <div className="tt-startup-heading">
-              <span className="tt-startup-eyebrow">GLOBAL ENVIRONMENTAL DATA</span>
-              <h2>Getting TerraTrace ready</h2>
-              <p>
-                We're connecting to our servers and loading global facility data. This may take a few moments.
-              </p>
-              <p className="tt-startup-reload">
-                If the website doesn't load, please reload the page.
-              </p>
-            </div>
-
-            <div className="tt-startup-progress">
-              <div className="tt-startup-progress-track">
-                <span />
-              </div>
-              <div className="tt-startup-progress-caption">
-                <span>LOADING YOUR DASHBOARD...</span>
-                <span className="tt-startup-pulse">LIVE</span>
-              </div>
-            </div>
-
-            <div className="tt-startup-steps">
-              <div className="tt-startup-step active">
-                <span className="tt-startup-step-icon"><i /></span>
-                <div>
-                  <strong>Connecting to TerraTrace</strong>
-                  <small>Establishing a connection to our servers</small>
-                </div>
-              </div>
-              <div className="tt-startup-step active">
-                <span className="tt-startup-step-icon"><i /></span>
-                <div>
-                  <strong>Loading facility data</strong>
-                  <small>Getting global facility information</small>
-                </div>
-              </div>
-              <div className="tt-startup-step">
-                <span className="tt-startup-step-icon"><i /></span>
-                <div>
-                  <strong>Preparing your dashboard</strong>
-                  <small>Getting the map ready</small>
-                </div>
-              </div>
-            </div>
-
-            <div className="tt-startup-footer">
-              <span>GLOBAL FACILITY DATA</span>
-              <span>TERRATRACE</span>
-            </div>
-          </section>
+            <p>Loading facility data…</p>
+            <div className="tt-simple-loader" />
+          </div>
         </div>
       )}
     </div>

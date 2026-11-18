@@ -1296,7 +1296,15 @@ export async function fetchInitialDashboardData() {
     }
 
     const facilities = data.facilities
-      .map((record, index) => normalizeFacilityRecord(record, index))
+      .map((record, index) => {
+        // Compact static dataset: convert each array into the original
+        // named-field format before passing it to the existing normalizer.
+        const item = Array.isArray(record)
+          ? Object.fromEntries(data.fields.map((field, i) => [field, record[i]]))
+          : record;
+
+        return normalizeFacilityRecord(item, index);
+      })
       .filter(Boolean);
 
     const countryCounts = new Map();
